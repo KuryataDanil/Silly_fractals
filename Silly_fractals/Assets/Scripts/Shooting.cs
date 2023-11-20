@@ -8,6 +8,11 @@ public class Shooting : MonoBehaviour
     public GameObject bulletPrefab;
     public float bulletForce = 20f;
 
+    void Start()
+    {
+        bulletPrefab.GetComponent<PlayerBullet>().damage = GetComponentInParent<PlayerController>().damage;
+    }
+
     void Update()
     {
         if(Input.GetButtonDown("Fire1"))
