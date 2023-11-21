@@ -4,26 +4,26 @@ public class EnemyStats : MonoBehaviour
 {
     private SpriteRenderer sprite_rend;
 
-    public int max_health;
-    public float damage;
-    public float speed;
-    public float fire_rate;
+    public Stat max_health;
+    public Stat damage;
+    public Stat speed;
+    public Stat fire_rate;
     public int multyshot;
-    public float lookRadius;
-    public float shootDistance;
+    public Stat lookRadius;
+    public Stat shootDistance;
 
-    private int health;
+    private float health;
 
     private void Start()
     {
-        health = max_health;
+        health = max_health.GetValue;
         sprite_rend = GetComponent<SpriteRenderer>();
     }
 
     public void TakeDamage(float dmg)
     {
-        health -= Mathf.RoundToInt(dmg);
-        sprite_rend.color = Color.Lerp(Color.red, Color.white, (float)health / max_health);
+        health -= dmg;
+        sprite_rend.color = Color.Lerp(Color.red, Color.white, (float)health / max_health.GetValue);
         if (health <= 0)
             Die();
     }
@@ -34,5 +34,5 @@ public class EnemyStats : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public int Health { get { return health; } }
+    public float Health { get { return health; } }
 }

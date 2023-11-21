@@ -7,14 +7,16 @@ public class PlayerStats : MonoBehaviour
     public Sprite[] spriteArray;
 
     public int max_health;
-    public float damage;
-    public float speed;
-    public float fire_rate;
+    public Stat damage;
+    public Stat speed;
+    public Stat fire_rate;
+    public Stat bulletForce;
     public int multyshot;
+    
 
     private int health;
 
-    private void Start()
+    void Start()
     {
         health = max_health;
         sprite_rend = GetComponent<SpriteRenderer>();
@@ -55,5 +57,10 @@ public class PlayerStats : MonoBehaviour
         sprite_rend.sprite = spriteArray[3];
 
         this.enabled = false;
+    }
+
+    public void Heal(int x)
+    {
+        health = (health + x > max_health) ? max_health : health + x;
     }
 }

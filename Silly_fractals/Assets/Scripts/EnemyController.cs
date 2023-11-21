@@ -24,11 +24,11 @@ public class EnemyController : MonoBehaviour
     {
         stats = GetComponent<EnemyStats>();
 
-        speed = stats.speed;
-        coolDown = 1 / stats.fire_rate;
-        lookRadius = stats.lookRadius;
-        shootDistance = stats.shootDistance;
-        bulletPrefab.GetComponent<EnemyBullet>().damage = stats.damage;
+        speed = stats.speed.GetValue;
+        coolDown = 1 / stats.fire_rate.GetValue;
+        lookRadius = stats.lookRadius.GetValue;
+        shootDistance = stats.shootDistance.GetValue;
+        bulletPrefab.GetComponent<EnemyBullet>().damage = stats.damage.GetValue;
 
         rb = GetComponent<Rigidbody2D>();
         target = PlayerManager.instance.player.transform;
@@ -48,7 +48,7 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-        if (distance <= lookRadius || stats.max_health > stats.Health)
+        if (distance <= lookRadius || stats.max_health.GetValue > stats.Health)
             _targeted = true;
     }
 
