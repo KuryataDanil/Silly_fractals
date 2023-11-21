@@ -5,14 +5,20 @@ using UnityEngine;
 public class PlayerBullet : MonoBehaviour
 {
     public float lifeTime;
+    [HideInInspector]
     public float damage;
+
+    private void Start()
+    {
+        Destroy(gameObject, lifeTime);
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         switch (other.tag)
         {
             case "Enemy":
-                other.GetComponent<EnemyController>().TakeDamage(damage);
+                other.GetComponent<EnemyStats>().TakeDamage(damage);
                 DestroyBullet();
                 break;
             case "Player":

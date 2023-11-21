@@ -5,12 +5,14 @@ using UnityEngine;
 public class EnemyBullet : MonoBehaviour
 {
     public float lifeTime;
-    PlayerController stats;
+    PlayerStats stats;
+    [HideInInspector]
     public float damage;
 
     void Start()
     {
-        stats = PlayerManager.instance.player.GetComponent<PlayerController>();
+        stats = PlayerManager.instance.player.GetComponent<PlayerStats>();
+        Destroy(gameObject, lifeTime);
     }
 
     void OnTriggerEnter2D(Collider2D other)

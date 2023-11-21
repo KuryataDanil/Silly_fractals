@@ -4,29 +4,31 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public float maxHealth = 5;
-    public float damage = 1;
-    public float lookRadius = 10f;
-    public float shootDistance = 7f;
-    public float speed = 0.5f;
-    public float coolDown = 0.5f;
-
     public GameObject bulletPrefab;
     public float bulletForce = 20f;
 
     Transform target;
     bool _targeted;
 
+    private float lookRadius;
+    private float shootDistance;
+    private float coolDown = 0.5f;
+    private float speed;
     private float lastShotTime;
-    private float health;
     private Rigidbody2D rb;
-    private SpriteRenderer _spriteRend;
+    private EnemyStats stats;
 
     void Start()
     {
-        _spriteRend = GetComponent<SpriteRenderer>();
+        stats = GetComponent<EnemyStats>();
+
+        speed = stats.speed;
+        coolDown = 1 / stats.fire_rate;
+        lookRadius = stats.lookRadius;
+        shootDistance = stats.shootDistance;
+        bulletPrefab.GetComponent<EnemyBullet>().damage = stats.damage;
+
         rb = GetComponent<Rigidbody2D>();
-        health = maxHealth;
         target = PlayerManager.instance.player.transform;
     }
 
@@ -44,13 +46,13 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
-        if (distance <= lookRadius || health < maxHealth)
+        if (distance <= lookRadius || stats.max_health > stats.Health)
             _targeted = true;
     }
 
     void FaceTarget()
     {
-        float angle = Mathf.Atan2(transform.position.y - target.position.y, transform.position.x - target.position.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg;
         Quaternion lookRotation = Quaternion.Euler(0, 0, angle);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
@@ -66,17 +68,5 @@ public class EnemyController : MonoBehaviour
         rb_b.AddForce((target.position - transform.position).normalized * bulletForce, ForceMode2D.Impulse);
     }
 
-    public void TakeDamage(float dmg)
-    {
-        health -= dmg;
-        _spriteRend.color = Color.Lerp(Color.red, Color.white, health / maxHealth);
-        if (health <= 0)
-            Die();
-    }
-
-    void Die()
-    {
-        Debug.Log(gameObject.name + " DEAD");
-        Destroy(gameObject);
-    }
+    
 }

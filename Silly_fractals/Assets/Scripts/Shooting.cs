@@ -10,7 +10,7 @@ public class Shooting : MonoBehaviour
 
     void Start()
     {
-        bulletPrefab.GetComponent<PlayerBullet>().damage = GetComponentInParent<PlayerController>().damage;
+        bulletPrefab.GetComponent<PlayerBullet>().damage = GetComponent<PlayerStats>().damage;
     }
 
     void Update()
