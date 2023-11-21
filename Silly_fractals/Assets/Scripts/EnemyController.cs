@@ -17,6 +17,8 @@ public class EnemyController : MonoBehaviour
     private float lastShotTime;
     private Rigidbody2D rb;
     private EnemyStats stats;
+    private Quaternion lookRotation;
+
 
     void Start()
     {
@@ -53,8 +55,8 @@ public class EnemyController : MonoBehaviour
     void FaceTarget()
     {
         float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg;
-        Quaternion lookRotation = Quaternion.Euler(0, 0, angle);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        lookRotation = Quaternion.Euler(0, 0, angle);
+        rb.MoveRotation(Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f));
     }
 
     void Shoot()
@@ -63,10 +65,8 @@ public class EnemyController : MonoBehaviour
             return;
         lastShotTime = Time.time;
 
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, lookRotation);
         Rigidbody2D rb_b = bullet.GetComponent<Rigidbody2D>();
         rb_b.AddForce((target.position - transform.position).normalized * bulletForce, ForceMode2D.Impulse);
     }
-
-    
 }
