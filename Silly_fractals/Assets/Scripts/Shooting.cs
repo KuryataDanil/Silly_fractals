@@ -6,11 +6,11 @@ public class Shooting : MonoBehaviour
 {
     public Transform firePoint;
     public GameObject bulletPrefab;
-    private Stat bulletForce;
+    private Stat bulletSpeed;
 
     void Start()
     {
-        bulletForce = GetComponent<PlayerStats>().bulletForce;
+        bulletSpeed = GetComponent<PlayerStats>().bulletSpeed;
     }
 
     void Update()
@@ -25,6 +25,6 @@ public class Shooting : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(firePoint.right * bulletForce.GetValue, ForceMode2D.Impulse);
+        rb.AddForce(firePoint.right * bulletSpeed.GetValue, ForceMode2D.Impulse);
     }
 }

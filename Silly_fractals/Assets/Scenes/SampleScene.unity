@@ -428,7 +428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6250848094475473481, guid: 846233b74d3d86d41a91674bde161bce, type: 3}
       propertyPath: speed.baseValue
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6250848094475473481, guid: 846233b74d3d86d41a91674bde161bce, type: 3}
       propertyPath: damage.baseValue
@@ -440,6 +440,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6250848094475473481, guid: 846233b74d3d86d41a91674bde161bce, type: 3}
       propertyPath: bulletForce.baseValue
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6250848094475473481, guid: 846233b74d3d86d41a91674bde161bce, type: 3}
+      propertyPath: bulletSpeed.baseValue
       value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []

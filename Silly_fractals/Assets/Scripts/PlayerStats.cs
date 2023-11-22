@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -10,11 +11,17 @@ public class PlayerStats : MonoBehaviour
     public Stat damage;
     public Stat speed;
     public Stat fire_rate;
-    public Stat bulletForce;
+    public Stat bulletSpeed;
     public int multyshot;
-    
+    public int ricochet;
+    public int bulletPenetration;
+
+    public float damageDependsOnHp;
+    public float speedUpAfterDamage;
 
     private int health;
+
+    public int Health { get { return health; } }
 
     void Start()
     {
@@ -24,10 +31,16 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
+
         health -= Mathf.RoundToInt(dmg);
         ChangeSprite();
         if (health <= 0)
             Die();
+
+        damage.AddModifier(damageDependsOnHp * Mathf.Round(dmg) / max_health);
+        if (speedUpAfterDamage == 0)
+            return;
+        SpeedUpFor2Sec();
     }
 
     private void ChangeSprite()
@@ -62,5 +75,20 @@ public class PlayerStats : MonoBehaviour
     public void Heal(int x)
     {
         health = (health + x > max_health) ? max_health : health + x;
+        ChangeSprite();
+
+        damage.AddModifier(-damageDependsOnHp * (float)x / max_health);
+    }
+
+    private async void SpeedUpFor2Sec()
+    {
+        float Timer = 0;
+        speed.AddModifier(speedUpAfterDamage);
+        while (Timer < 2)
+        {
+            Timer += Time.deltaTime;
+            await Task.Yield();
+        }
+        speed.AddModifier(-speedUpAfterDamage);
     }
 }

@@ -27,6 +27,8 @@ public class EnemyBullet : MonoBehaviour
                 break;
             case "Item":
                 break;
+            case "EnemyBullet":
+                break;
             default:
                 DestroyBullet();
                 break;

@@ -23,6 +23,8 @@ public class PlayerBullet : MonoBehaviour
                 break;
             case "Item":
                 break;
+            case "PlayerBullet":
+                break;
             default:
                 DestroyBullet();
                 break;
