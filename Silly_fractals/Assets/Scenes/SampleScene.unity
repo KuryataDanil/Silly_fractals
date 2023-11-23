@@ -654,7 +654,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1077,6 +1077,26 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6250848094475473480, guid: 846233b74d3d86d41a91674bde161bce, type: 3}
   m_PrefabInstance: {fileID: 6250848094994149516}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1865343693
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865343684}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 64bebb78d04252744ae027376ec600a4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2026215124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,6 +1188,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2495874313352889992, guid: fc9532a2f38b6614e8acf675dbd3d14f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2495874313352889993, guid: fc9532a2f38b6614e8acf675dbd3d14f, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1225,6 +1249,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4355032198225695368, guid: 692141c216ea87c41884520477341fc6, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4355032198225695369, guid: 692141c216ea87c41884520477341fc6, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1363,6 +1391,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8946485419588261194, guid: cd7d7ec812ec96743ab4a592a3d97453, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8946485419588261195, guid: cd7d7ec812ec96743ab4a592a3d97453, type: 3}
       propertyPath: m_RootOrder
       value: 4

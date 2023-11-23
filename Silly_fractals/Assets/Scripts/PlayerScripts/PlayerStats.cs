@@ -21,6 +21,9 @@ public class PlayerStats : MonoBehaviour
 
     private int health;
 
+    private bool _invincible;
+    private int _invincible_timer;
+
     public int Health { get { return health; } }
 
     void Start()
@@ -28,9 +31,13 @@ public class PlayerStats : MonoBehaviour
         health = max_health;
         sprite_rend = GetComponent<SpriteRenderer>();
     }
-
+    
     public void TakeDamage(float dmg)
     {
+        if (_invincible)
+            return;
+        InvincibleTime();
+
 
         health -= Mathf.RoundToInt(dmg);
         ChangeSprite();
@@ -90,5 +97,20 @@ public class PlayerStats : MonoBehaviour
             await Task.Yield();
         }
         speed.AddModifier(-speedUpAfterDamage);
+    }
+
+    private async void InvincibleTime()
+    {
+        var x = GetComponent<Animator>();
+        x.SetBool("invincible", true);
+        _invincible = true;
+        float Timer = 0;
+        while (Timer < 1)
+        {
+            Timer += Time.deltaTime;
+            await Task.Yield();
+        }
+        _invincible = false;
+        x.SetBool("invincible", false);
     }
 }
