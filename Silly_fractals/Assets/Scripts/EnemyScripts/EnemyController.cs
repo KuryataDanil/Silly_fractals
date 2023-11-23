@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour
     private Quaternion lookRotation;
 
 
-    void Start()
+    void OnEnable()
     {
         stats = GetComponent<EnemyStats>();
 
@@ -92,7 +92,6 @@ public class EnemyController : MonoBehaviour
 
             GameObject bullet = Instantiate(bulletPrefab, bulletPos, Quaternion.Euler(bulletRot) * transform.rotation);
             Rigidbody2D rb_b = bullet.GetComponent<Rigidbody2D>();
-            Debug.Log(Quaternion.Euler(bulletRot).eulerAngles);
             rb_b.AddForce(Quaternion.Euler(bulletRot) * transform.right.normalized * stats.bulletSpeed.GetValue, ForceMode2D.Impulse);
         }
     }

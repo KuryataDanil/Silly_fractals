@@ -14,10 +14,10 @@ public class EnemySpawner : MonoBehaviour
     {
         spawnPoints = GetComponentsInChildren<EnemySpawnPoint>();
         Debug.Log(spawnPoints.Length);
-        SpawnEnemies(enemyCount);
+        SpawnNewEnemies(enemyCount);
     }
 
-    public void SpawnEnemies(int n)
+    public void SpawnNewEnemies(int n)
     {
         for (var i = 0; i < n; i++)
         {
@@ -26,4 +26,14 @@ public class EnemySpawner : MonoBehaviour
             r_sPoint.SpawnEnemy(r_enemy);
         }
     }
+    public void SpawnFromList()
+    {
+        var lst = EnemiesManager.instance.listOfEnemies;
+        for (var i = 0; i < lst.Count; i++)
+        {
+            EnemySpawnPoint r_sPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            r_sPoint.EnableEnemy(lst[i]);
+        }
+    }
+
 }

@@ -17,16 +17,33 @@ public class EnemySpawnPoint : MonoBehaviour
             {
                 Quaternion r_rotarion = Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f));
                 GameObject enemy = Instantiate(enemyPrefab, randomSpawnPoint, r_rotarion);
+                EnemiesManager.instance.listOfEnemies.Add(enemy);
                 break;
             }
         }
+    }
 
+    public void EnableEnemy(GameObject enemy)
+    {
+        while (true)
+        {
+            Vector2 randomSpawnPoint = GenerateRandomPosition();
+
+            if (CheckCollision(randomSpawnPoint))
+            {
+                Quaternion r_rotarion = Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f));
+                enemy.transform.position = randomSpawnPoint;
+                enemy.transform.rotation = r_rotarion;
+                enemy.SetActive(true);
+                break;
+            }
+        }
     }
 
     Vector3 GenerateRandomPosition()
     {
         Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
-        Vector3 randomPosition = new Vector3(randomCircle.x, randomCircle.y, 0f) + transform.position;
+        Vector2 randomPosition = new Vector2(randomCircle.x, randomCircle.y) + (Vector2)transform.position;
         return randomPosition;
     }
 

@@ -15,24 +15,30 @@ public class EnemyStats : MonoBehaviour
 
     private float health;
 
-    private void Start()
+    private void OnEnable()
     {
         health = max_health.GetValue;
         sprite_rend = GetComponent<SpriteRenderer>();
+        ChangeColor();
     }
 
     public void TakeDamage(float dmg)
     {
         health -= dmg;
-        sprite_rend.color = Color.Lerp(Color.red, Color.white, (float)health / max_health.GetValue);
+        ChangeColor();
         if (health <= 0)
             Die();
+    }
+
+    private void ChangeColor()
+    {
+        sprite_rend.color = Color.Lerp(Color.red, Color.white, (float)health / max_health.GetValue);
     }
 
     void Die()
     {
         Debug.Log(name + " DEAD");
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public float Health { get { return health; } }
