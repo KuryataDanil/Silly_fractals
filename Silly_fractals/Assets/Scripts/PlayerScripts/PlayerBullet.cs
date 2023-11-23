@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    public float lifeTime;
-    [HideInInspector]
-    public float damage;
+    private float damage;
 
-    private void Start()
+    void Start()
     {
-        Destroy(gameObject, lifeTime);
+        damage = PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -22,6 +20,10 @@ public class PlayerBullet : MonoBehaviour
                 DestroyBullet();
                 break;
             case "Player":
+                break;
+            case "Item":
+                break;
+            case "PlayerBullet":
                 break;
             default:
                 DestroyBullet();

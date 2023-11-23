@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     Vector2 movement;
 
-    private float speed;
+    private Stat speed;
 
 
     void Start()
@@ -23,6 +23,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * speed.GetValue * Time.fixedDeltaTime);
     }
 }
