@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public float bulletForce = 20f;
 
     Transform target;
     bool _targeted;
@@ -15,6 +14,7 @@ public class EnemyController : MonoBehaviour
     private float coolDown = 0.5f;
     private float speed;
     private float lastShotTime;
+    private float multiShot;
     private Rigidbody2D rb;
     private EnemyStats stats;
     private Quaternion lookRotation;
@@ -29,6 +29,7 @@ public class EnemyController : MonoBehaviour
         lookRadius = stats.lookRadius.GetValue;
         shootDistance = stats.shootDistance.GetValue;
         bulletPrefab.GetComponent<EnemyBullet>().damage = stats.damage.GetValue;
+        multiShot = stats.multyshot;
 
         rb = GetComponent<Rigidbody2D>();
         target = PlayerManager.instance.player.transform;
@@ -49,14 +50,30 @@ public class EnemyController : MonoBehaviour
         }
 
         if (distance <= lookRadius || stats.max_health.GetValue > stats.Health)
+        {
             _targeted = true;
+            Rotate();
+        }
+    }
+
+    void Rotate()
+    {
+        float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg;
+        lookRotation = Quaternion.Euler(0, 0, angle);
+
+        float Timer = 0;
+        while (Timer < 0.2)
+        {
+            rb.MoveRotation(Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 20f));
+            Timer += Time.deltaTime;
+        }
     }
 
     void FaceTarget()
     {
         float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg;
         lookRotation = Quaternion.Euler(0, 0, angle);
-        rb.MoveRotation(Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f));
+        rb.MoveRotation(Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 50f));
     }
 
     void Shoot()
@@ -65,8 +82,18 @@ public class EnemyController : MonoBehaviour
             return;
         lastShotTime = Time.time;
 
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, lookRotation);
-        Rigidbody2D rb_b = bullet.GetComponent<Rigidbody2D>();
-        rb_b.AddForce((target.position - transform.position).normalized * bulletForce, ForceMode2D.Impulse);
+        Vector3 bulletPos = transform.position + (transform.up * 0.5f);
+        Vector3 bulletRot = new Vector3(0, 0, +45);
+        for (int i = 0; i <= multiShot; i++)
+        {
+            bulletPos += -transform.up / (multiShot + 2);
+            bulletRot.z -= 90 / (multiShot + 2);
+            
+
+            GameObject bullet = Instantiate(bulletPrefab, bulletPos, Quaternion.Euler(bulletRot) * transform.rotation);
+            Rigidbody2D rb_b = bullet.GetComponent<Rigidbody2D>();
+            Debug.Log(Quaternion.Euler(bulletRot).eulerAngles);
+            rb_b.AddForce(Quaternion.Euler(bulletRot) * transform.right.normalized * stats.bulletSpeed.GetValue, ForceMode2D.Impulse);
+        }
     }
 }

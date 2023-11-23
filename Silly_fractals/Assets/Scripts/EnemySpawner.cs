@@ -2,52 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
-    public float spawnRadius = 5f;
+    [SerializeField]
+    private GameObject[] enemies;
+    private EnemySpawnPoint[] spawnPoints;
+
+    public int enemyCount;
 
     private void Start()
     {
-        SpawnEnemy();
+        spawnPoints = GetComponentsInChildren<EnemySpawnPoint>();
+        Debug.Log(spawnPoints.Length);
+        SpawnEnemies(enemyCount);
     }
 
-    void SpawnEnemy()
+    public void SpawnEnemies(int n)
     {
-        while (true) { 
-            Vector3 randomSpawnPoint = GenerateRandomPosition();
-
-            if (!CheckCollision(randomSpawnPoint))
-            {
-                GameObject enemy = Instantiate(enemyPrefab, randomSpawnPoint, Quaternion.identity);
-                break;
-            }
-        }
-
-    }
-
-    Vector3 GenerateRandomPosition()
-    {
-        Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
-        Vector3 randomPosition = new Vector3(randomCircle.x, randomCircle.y, 0f) + transform.position;
-        return randomPosition;
-    }
-
-    bool CheckCollision(Vector3 position)
-    {
-        // Проверяем, есть ли коллайдер вблизи новой позиции
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(position, 1f);
-
-        foreach (Collider2D collider in colliders)
+        for (var i = 0; i < n; i++)
         {
-            if (collider.CompareTag("Enemy"))
-            {
-                return true;
-            }
+            EnemySpawnPoint r_sPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            GameObject r_enemy = enemies[Random.Range(0, enemies.Length)];
+            r_sPoint.SpawnEnemy(r_enemy);
         }
-
-        return false;
     }
 }

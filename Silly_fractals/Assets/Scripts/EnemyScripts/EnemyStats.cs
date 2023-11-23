@@ -11,6 +11,7 @@ public class EnemyStats : MonoBehaviour
     public int multyshot;
     public Stat lookRadius;
     public Stat shootDistance;
+    public Stat bulletSpeed;
 
     private float health;
 

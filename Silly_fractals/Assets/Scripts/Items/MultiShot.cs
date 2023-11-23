@@ -7,5 +7,6 @@ public class MultiShot : ItemScript
     public override void UpdateStats(PlayerStats stats)
     {
         stats.multyshot++;
+        stats.GetComponent<Shooting>().IncMultiShot();
     }
 }
