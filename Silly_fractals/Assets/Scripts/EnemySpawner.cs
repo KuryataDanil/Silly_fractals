@@ -21,9 +21,13 @@ public class EnemySpawner : MonoBehaviour
     {
         for (var i = 0; i < n; i++)
         {
-            EnemySpawnPoint r_sPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
             GameObject r_enemy = enemies[Random.Range(0, enemies.Length)];
-            r_sPoint.SpawnEnemy(r_enemy);
+            bool f = true;
+            while (f)
+            {
+                EnemySpawnPoint r_sPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+                f = !r_sPoint.SpawnEnemy(r_enemy);
+            }
         }
     }
     public void SpawnFromList()
@@ -31,8 +35,12 @@ public class EnemySpawner : MonoBehaviour
         var lst = EnemiesManager.instance.listOfEnemies;
         for (var i = 0; i < lst.Count; i++)
         {
-            EnemySpawnPoint r_sPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-            r_sPoint.EnableEnemy(lst[i]);
+            bool f = true;
+            while (f)
+            {
+                EnemySpawnPoint r_sPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+                f = !r_sPoint.EnableEnemy(lst[i]);
+            }
         }
     }
 
