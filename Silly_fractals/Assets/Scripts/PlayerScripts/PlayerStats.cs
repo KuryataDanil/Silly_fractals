@@ -8,6 +8,8 @@ public class PlayerStats : MonoBehaviour
     private int spriteIndex;
     public Sprite[] spriteArray;
 
+    [SerializeField]
+    private int money;
     public int max_health;
     public Stat damage;
     public Stat speed;
@@ -26,6 +28,7 @@ public class PlayerStats : MonoBehaviour
     private int _invincible_timer;
 
     public int Health { get { return health; } }
+    public int Money { get { return money; } }
 
     public static event Action OnPlayerDamaged;
 
@@ -117,5 +120,10 @@ public class PlayerStats : MonoBehaviour
         }
         _invincible = false;
         x.SetBool("invincible", false);
+    }
+
+    public void AddMoney(int money)
+    {
+        this.money += money;
     }
 }

@@ -34,7 +34,6 @@ public class ItemScript : MonoBehaviour
             PlayerManager.instance.itemsSprites.Add(GetComponent<SpriteRenderer>().sprite);
             Inventory.instance.DrawItems();
         }
-        IncCount();
         Inventory.instance.UpdateText(this);
         UpdateStats(stats);
         gameObject.SetActive(false);
@@ -44,13 +43,6 @@ public class ItemScript : MonoBehaviour
 
     //---------------------------------------------------------------------//
     protected int count = 0;
-
-    public void IncCount()
-    {
-        count++;
-    }
-
-    public int GetCount { get { return count; } }
 
     public virtual string GetName { get { return "Name"; } }
 

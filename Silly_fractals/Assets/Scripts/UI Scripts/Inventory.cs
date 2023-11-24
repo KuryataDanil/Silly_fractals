@@ -16,40 +16,28 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        ClearItems();
     }
 
     #endregion
 
     public void DrawItems()
     {
-        ClearItems();
         int N = PlayerManager.instance.itemsScripts.Count;
-        for (int i = 0; i < N; i++)
-        {
-            CreateEmptyItem();
-        }
-
-        for (int i = 0; i < N; i++)
-        {
-            items[i].GetComponent<Image>().sprite = PlayerManager.instance.itemsSprites[i];
-            items[i].GetComponentInChildren<Text>().text = PlayerManager.instance.itemsScripts[i].GetCount.ToString();
-        }
+        CreateEmptyItem();
+        items[^1].GetComponent<Image>().sprite = PlayerManager.instance.itemsSprites[^1];
     }
 
     public void UpdateText(ItemScript i_script)
     {
         int i = PlayerManager.instance.itemsScripts.FindIndex(x => x.GetType() == i_script.GetType());
         string txt = items[i].GetComponentInChildren<Text>().text;
-        items[i].GetComponentInChildren<Text>().text = (int.Parse(txt)+1).ToString();
-        Debug.Log(txt);
+        items[i].GetComponentInChildren<Text>().text = (int.Parse(txt) + 1).ToString();
     }
 
     public void CreateEmptyItem()
     {
         GameObject newItem = Instantiate(itemPrefab, transform);
-
-        //HP newheartComp = newheart.GetComponent<HP>();
-        //newheartComp.SetImage(HeartStatus.Empty);
         items.Add(newItem);
     }
 
