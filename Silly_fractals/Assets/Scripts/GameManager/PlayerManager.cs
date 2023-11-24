@@ -20,6 +20,10 @@ public class PlayerManager : MonoBehaviour
     public List<ItemScript> itemsScripts;
     public List<Sprite> itemsSprites;
 
+    public GameObject itemText;
+
+    public GameObject canvas;
+
     private SpriteRenderer[] segments;
     private int curSeg;
 

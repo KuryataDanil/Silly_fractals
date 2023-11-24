@@ -127,7 +127,7 @@ MonoBehaviour:
   shootDistance:
     baseValue: 6
   bulletSpeed:
-    baseValue: 15
+    baseValue: 5
   drop:
   - {fileID: 3546128202960972438, guid: 7c471146ad3d060459b451d8d640e927, type: 3}
   - {fileID: 8622699890976881139, guid: 47133820a65a6de43963eb828c09c543, type: 3}

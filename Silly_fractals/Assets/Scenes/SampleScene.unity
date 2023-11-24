@@ -1025,8 +1025,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1865343684}
-  itemsScripts: []
-  itemsSprites: []
+  itemText: {fileID: 8540010088431750761, guid: 0ee297f2920560a4096fed054321fa20, type: 3}
+  canvas: {fileID: 385401088}
 --- !u!4 &559955817
 Transform:
   m_ObjectHideFlags: 0

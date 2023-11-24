@@ -7,6 +7,7 @@ using System.Linq;
 public class ItemScript : MonoBehaviour
 {
     private PlayerStats stats;
+    private GameObject text;
 
     [SerializeField]
     protected Color color;
@@ -14,6 +15,15 @@ public class ItemScript : MonoBehaviour
     void Start()
     {
         stats = PlayerManager.instance.player.GetComponent<PlayerStats>();
+        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
+        text = Instantiate(PlayerManager.instance.itemText, PlayerManager.instance.canvas.transform);
+
+
+        RectTransform rectTransform = text.GetComponent<RectTransform>();
+        rectTransform.position = screenPoint + new Vector2(0, (Camera.main.pixelHeight / 7f));
+
+        text.SetActive(false);
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -22,6 +32,16 @@ public class ItemScript : MonoBehaviour
         {
             MoveToPlayer(other.transform);
         }
+    }
+
+    private void OnMouseOver()
+    {
+        text.SetActive(true);
+    }
+
+    private void OnMouseExit()
+    {
+        text.SetActive(false);
     }
 
     private async void MoveToPlayer(Transform target)
@@ -40,7 +60,8 @@ public class ItemScript : MonoBehaviour
         }
         Inventory.instance.UpdateText(this);
         UpdateStats(stats);
-        gameObject.SetActive(false);
+        Destroy(gameObject);
+        Destroy(text);
     }
 
 
