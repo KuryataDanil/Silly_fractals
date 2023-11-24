@@ -13,6 +13,8 @@ public class EnemyStats : MonoBehaviour
     public Stat shootDistance;
     public Stat bulletSpeed;
 
+    public GameObject[] coins; 
+
     private float health;
 
     private void OnEnable()
@@ -39,6 +41,28 @@ public class EnemyStats : MonoBehaviour
     {
         Debug.Log(name + " DEAD");
         gameObject.SetActive(false);
+        DropCoin();
+    }
+
+    void DropCoin()
+    {
+        int n = Random.Range(0, 100);
+        int coin_ind = 0;
+        switch (n)
+        {
+            case <= 40:
+                coin_ind = 0;
+                break;
+            case <= 48:
+                coin_ind = 1;
+                break;
+            case <= 49:
+                coin_ind = 2;
+                break;
+            default:
+                return;
+        }
+        Instantiate(coins[coin_ind], transform.position, transform.rotation);
     }
 
     public float Health { get { return health; } }
