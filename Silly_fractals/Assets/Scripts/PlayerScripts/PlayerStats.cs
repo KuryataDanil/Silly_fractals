@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Threading.Tasks;
+using System;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -26,7 +27,9 @@ public class PlayerStats : MonoBehaviour
 
     public int Health { get { return health; } }
 
-    void Start()
+    public static event Action OnPlayerDamaged;
+
+    void Awake()
     {
         health = max_health;
         sprite_rend = GetComponent<SpriteRenderer>();
@@ -40,6 +43,7 @@ public class PlayerStats : MonoBehaviour
 
 
         health -= Mathf.RoundToInt(dmg);
+        OnPlayerDamaged?.Invoke();
         ChangeSprite();
         if (health <= 0)
             Die();
@@ -82,6 +86,7 @@ public class PlayerStats : MonoBehaviour
     public void Heal(int x)
     {
         health = (health + x > max_health) ? max_health : health + x;
+        OnPlayerDamaged?.Invoke();
         ChangeSprite();
 
         damage.AddModifier(-damageDependsOnHp * (float)x / max_health);
