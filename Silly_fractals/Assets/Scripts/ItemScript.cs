@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
+using System.Linq;
 
 public class ItemScript : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class ItemScript : MonoBehaviour
             transform.position = Vector2.MoveTowards((Vector2)transform.position, (Vector2)target.position, 3 * Time.fixedDeltaTime);
             await Task.Yield();
         }
+        if (!PlayerManager.instance.items.Any(x => x.GetType() == this.GetType()))
+            PlayerManager.instance.items.Add(this);
+        IncCount();
         UpdateStats(stats);
         gameObject.SetActive(false);
     }
@@ -34,7 +38,7 @@ public class ItemScript : MonoBehaviour
 
 
     //---------------------------------------------------------------------//
-    protected int count = 0;
+    protected static int count = 0;
 
     public void IncCount()
     {
