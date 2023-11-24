@@ -8,16 +8,19 @@ public class Shooting : MonoBehaviour
     public GameObject bulletPrefab;
     private Stat bulletSpeed;
     private int multiShot;
+    private float lastShotTime;
+    private Stat fire_rate;
 
     void Start()
     {
         bulletSpeed = GetComponent<PlayerStats>().bulletSpeed;
         multiShot = GetComponent<PlayerStats>().multyshot;
+        fire_rate = GetComponent<PlayerStats>().fire_rate;
     }
 
     void Update()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButton("Fire1"))
         {
             Shoot();
         }
@@ -25,6 +28,10 @@ public class Shooting : MonoBehaviour
 
     void Shoot()
     {
+        if (Time.time - lastShotTime < (1 / fire_rate.GetValue))
+            return;
+        lastShotTime = Time.time;
+
         Vector3 bulletPos = firePoint.position + (-transform.right * 0.5f);
         for (int i = 0; i <= multiShot; i++)
         {

@@ -127,7 +127,13 @@ MonoBehaviour:
   shootDistance:
     baseValue: 6
   bulletSpeed:
-    baseValue: 15
+    baseValue: 5
+  drop:
+  - {fileID: 3546128202960972438, guid: 7c471146ad3d060459b451d8d640e927, type: 3}
+  - {fileID: 8622699890976881139, guid: 47133820a65a6de43963eb828c09c543, type: 3}
+  - {fileID: 7910118526397138602, guid: 3b19964a33c99f14d86b0dcd66121590, type: 3}
+  - {fileID: 7529243706853503861, guid: 7c14cebd86cbd7044a5d13720917d88d, type: 3}
+  - {fileID: 2005334480102222474, guid: 14d1a4671bd457f4685be340e5f37a73, type: 3}
 --- !u!50 &4812865646749556162
 Rigidbody2D:
   serializedVersion: 4

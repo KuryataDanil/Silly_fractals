@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Threading.Tasks;
+using System;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class PlayerStats : MonoBehaviour
     private int spriteIndex;
     public Sprite[] spriteArray;
 
+    [SerializeField]
+    private int money;
     public int max_health;
     public Stat damage;
     public Stat speed;
@@ -18,6 +21,7 @@ public class PlayerStats : MonoBehaviour
 
     public float damageDependsOnHp;
     public float speedUpAfterDamage;
+    public int dashCooldown;
 
     private int health;
 
@@ -25,8 +29,12 @@ public class PlayerStats : MonoBehaviour
     private int _invincible_timer;
 
     public int Health { get { return health; } }
+    public int Money { get { return money; } }
 
-    void Start()
+    public static event Action OnPlayerDamaged;
+    public static event Action OnMoneyChanged;
+
+    void Awake()
     {
         health = max_health;
         sprite_rend = GetComponent<SpriteRenderer>();
@@ -40,6 +48,7 @@ public class PlayerStats : MonoBehaviour
 
 
         health -= Mathf.RoundToInt(dmg);
+        OnPlayerDamaged?.Invoke();
         ChangeSprite();
         if (health <= 0)
             Die();
@@ -82,6 +91,7 @@ public class PlayerStats : MonoBehaviour
     public void Heal(int x)
     {
         health = (health + x > max_health) ? max_health : health + x;
+        OnPlayerDamaged?.Invoke();
         ChangeSprite();
 
         damage.AddModifier(-damageDependsOnHp * (float)x / max_health);
@@ -105,12 +115,18 @@ public class PlayerStats : MonoBehaviour
         x.SetBool("invincible", true);
         _invincible = true;
         float Timer = 0;
-        while (Timer < 1)
+        while (Timer < 1.5)
         {
             Timer += Time.deltaTime;
             await Task.Yield();
         }
         _invincible = false;
         x.SetBool("invincible", false);
+    }
+
+    public void AddMoney(int money)
+    {
+        this.money += money;
+        OnMoneyChanged?.Invoke();
     }
 }

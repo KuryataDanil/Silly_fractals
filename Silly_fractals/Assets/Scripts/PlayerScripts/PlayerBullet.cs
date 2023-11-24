@@ -19,14 +19,10 @@ public class PlayerBullet : MonoBehaviour
                 other.GetComponent<EnemyStats>().TakeDamage(damage);
                 DestroyBullet();
                 break;
-            case "Player":
-                break;
-            case "Item":
-                break;
-            case "PlayerBullet":
+            case "Wall":
+                DestroyBullet();
                 break;
             default:
-                DestroyBullet();
                 break;
         }
     }
