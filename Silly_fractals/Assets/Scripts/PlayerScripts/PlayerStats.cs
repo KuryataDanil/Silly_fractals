@@ -31,6 +31,7 @@ public class PlayerStats : MonoBehaviour
     public int Money { get { return money; } }
 
     public static event Action OnPlayerDamaged;
+    public static event Action OnMoneyChanged;
 
     void Awake()
     {
@@ -125,5 +126,6 @@ public class PlayerStats : MonoBehaviour
     public void AddMoney(int money)
     {
         this.money += money;
+        OnMoneyChanged?.Invoke();
     }
 }
