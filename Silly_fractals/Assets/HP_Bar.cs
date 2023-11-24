@@ -28,7 +28,6 @@ public class HP_Bar : MonoBehaviour
 
     public void DrawHearts()
     {
-        Debug.Log(stats.max_health + " " + stats.Health);
         CleartHearts();
         int heartsN = stats.max_health / 2 + stats.max_health % 2;
         for (int i = 0; i < heartsN; i++)

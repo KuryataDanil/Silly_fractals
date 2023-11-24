@@ -17,5 +17,6 @@ public class PlayerManager : MonoBehaviour
 
     public GameObject player;
 
-    public List<ItemScript> items;
+    public List<ItemScript> itemsScripts;
+    public List<Sprite> itemsSprites;
 }
