@@ -3366,5 +3366,9 @@ PrefabInstance:
       propertyPath: dashCooldown
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 9058508400500418397, guid: 846233b74d3d86d41a91674bde161bce, type: 3}
+      propertyPath: fire_rate.baseValue
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 846233b74d3d86d41a91674bde161bce, type: 3}
