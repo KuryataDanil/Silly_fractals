@@ -8,6 +8,9 @@ public class ItemScript : MonoBehaviour
 {
     private PlayerStats stats;
 
+    [SerializeField]
+    protected Color color;
+
     void Start()
     {
         stats = PlayerManager.instance.player.GetComponent<PlayerStats>();
@@ -33,6 +36,7 @@ public class ItemScript : MonoBehaviour
             PlayerManager.instance.itemsScripts.Add(this);
             PlayerManager.instance.itemsSprites.Add(GetComponent<SpriteRenderer>().sprite);
             Inventory.instance.DrawItems();
+            PlayerManager.instance.ColorSegment(color);
         }
         Inventory.instance.UpdateText(this);
         UpdateStats(stats);
