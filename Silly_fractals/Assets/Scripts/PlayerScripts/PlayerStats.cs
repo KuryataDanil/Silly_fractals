@@ -21,6 +21,7 @@ public class PlayerStats : MonoBehaviour
 
     public float damageDependsOnHp;
     public float speedUpAfterDamage;
+    public int dashCooldown;
 
     private int health;
 
