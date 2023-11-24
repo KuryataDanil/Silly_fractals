@@ -110,7 +110,7 @@ public class PlayerStats : MonoBehaviour
         x.SetBool("invincible", true);
         _invincible = true;
         float Timer = 0;
-        while (Timer < 1)
+        while (Timer < 1.5)
         {
             Timer += Time.deltaTime;
             await Task.Yield();

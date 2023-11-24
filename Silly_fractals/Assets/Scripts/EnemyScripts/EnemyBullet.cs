@@ -23,14 +23,10 @@ public class EnemyBullet : MonoBehaviour
                 stats.TakeDamage(damage);
                 DestroyBullet();
                 break;
-            case "Enemy":
-                break;
-            case "Item":
-                break;
-            case "EnemyBullet":
+            case "Wall":
+                DestroyBullet();
                 break;
             default:
-                DestroyBullet();
                 break;
         }
     }
