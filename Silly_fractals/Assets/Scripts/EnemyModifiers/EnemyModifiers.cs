@@ -2,27 +2,30 @@
 
 public static class EnemyModifiers
 {
-    public delegate string AddModifier();
+    public delegate string AddModifier(bool get_description);
     public static List<AddModifier> listOfModifiers = new List<AddModifier> { 
         SpeedModifier, 
         DamageBase, 
         SpeedBase };
 
-    public static string SpeedModifier()
+    public static string SpeedModifier(bool get_description)
     {
-        EnemiesManager.instance.listOfStats.ForEach(x => x.speed.AddModifier(0.2f));
+        if (!get_description)
+            EnemiesManager.instance.listOfStats.ForEach(x => x.speed.AddModifier(0.2f));
         return "Скорость врагов увеличена на 20%";
     }
 
-    public static string DamageBase()
+    public static string DamageBase(bool get_description)
     {
-        EnemiesManager.instance.listOfStats.ForEach(x => x.damage.AddBaseValue(1));
+        if (!get_description)
+            EnemiesManager.instance.listOfStats.ForEach(x => x.damage.AddBaseValue(1));
         return "Урон врагов увеличен на 1";
     }
 
-    public static string SpeedBase()
+    public static string SpeedBase(bool get_description)
     {
-        EnemiesManager.instance.listOfStats.ForEach(x => x.speed.AddBaseValue(1f));
+        if (!get_description)
+            EnemiesManager.instance.listOfStats.ForEach(x => x.speed.AddBaseValue(1f));
         return "Базовая скорость врагов увеличена на 1";
     }
 }

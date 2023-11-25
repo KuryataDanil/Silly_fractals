@@ -23,4 +23,28 @@ public class EnemiesManager : MonoBehaviour
 
     public GameObject spawner;
 
+    public Hatch[] hatches;
+
+    private List<EnemyModifiers.AddModifier> listOfModifiers;
+
+    private void Start()
+    {
+        listOfModifiers = EnemyModifiers.listOfModifiers;
+    }
+
+    public void CheckEnemiesAreDead()
+    {
+        if (listOfEnemies.TrueForAll(x => !x.activeSelf))
+        {
+            OpenHatches();
+        }
+    }
+
+    public void OpenHatches()
+    {
+        foreach (Hatch hatch in hatches)
+        {
+            hatch.OpenHatch();
+        }
+    }
 }

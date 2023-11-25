@@ -11,12 +11,12 @@ public class EnemySpawnPoint : MonoBehaviour
     public bool SpawnEnemy(GameObject enemyPrefab)
     {
         Vector3 player_pos = PlayerManager.instance.player.transform.position;
-        if (Vector2.Distance(transform.position, player_pos) < 4)
+        if (Vector2.Distance(transform.position, player_pos) < 3)
             return false;
         while (true) { 
             Vector3 randomSpawnPoint = GenerateRandomPosition();
 
-            if (Vector2.Distance(randomSpawnPoint, player_pos) > 4 && CheckCollision(randomSpawnPoint))
+            if (Vector2.Distance(randomSpawnPoint, player_pos) > 3 && CheckCollision(randomSpawnPoint))
             {
                 Quaternion r_rotarion = Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f));
                 GameObject enemy = Instantiate(enemyPrefab, randomSpawnPoint, r_rotarion);
@@ -32,13 +32,13 @@ public class EnemySpawnPoint : MonoBehaviour
     public bool EnableEnemy(GameObject enemy)
     {
         Vector3 player_pos = PlayerManager.instance.player.transform.position;
-        if (Vector2.Distance(transform.position, player_pos) < 4)
+        if (Vector2.Distance(transform.position, player_pos) < 3)
             return false;
         while (true)
         {
             Vector2 randomSpawnPoint = GenerateRandomPosition();
 
-            if (Vector2.Distance(randomSpawnPoint, player_pos) > 4 && CheckCollision(randomSpawnPoint))
+            if (Vector2.Distance(randomSpawnPoint, player_pos) > 3 && CheckCollision(randomSpawnPoint))
             {
                 enemy.transform.position = randomSpawnPoint;
                 enemy.transform.rotation = Quaternion.LookRotation(Vector3.forward, Quaternion.Euler(0, 0, 90) * (new Vector3(0f, -2.5f, enemy.transform.position.z) - enemy.transform.position));

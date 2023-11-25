@@ -44,6 +44,7 @@ public class EnemyStats : MonoBehaviour
         gameObject.SetActive(false);
         Debug.Log(name + " DEAD");
         DropCoin();
+        EnemiesManager.instance.CheckEnemiesAreDead();
     }
 
     void DropCoin()
