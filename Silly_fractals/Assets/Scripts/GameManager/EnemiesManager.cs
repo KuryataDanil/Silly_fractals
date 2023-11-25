@@ -15,5 +15,12 @@ public class EnemiesManager : MonoBehaviour
 
     #endregion
 
+    [HideInInspector]
     public List<GameObject> listOfEnemies;
+
+    [HideInInspector]
+    public List<EnemyStats> listOfStats;
+
+    public GameObject spawner;
+
 }
