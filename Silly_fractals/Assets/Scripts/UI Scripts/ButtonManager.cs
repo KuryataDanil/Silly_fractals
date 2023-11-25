@@ -10,6 +10,10 @@ public class ButtonManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-
+    public void Exit()
+    {
+        Debug.Log("Выход");
+        Application.Quit();
+    }
 
 }
