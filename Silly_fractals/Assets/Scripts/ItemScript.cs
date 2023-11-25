@@ -64,6 +64,7 @@ public class ItemScript : MonoBehaviour
         }
         Inventory.instance.UpdateText(this);
         UpdateStats(stats);
+        StatsHUD.instance.UpdateStatsHUD();
         Destroy(gameObject);
         Destroy(text);
     }
