@@ -107,8 +107,8 @@ public class Hatch : MonoBehaviour
         }
 
         text.SetActive(false);
+        listOfModifiers.ForEach(x => x(false));
         EnemiesManager.instance.CloseHatches();
-        listOfModifiers.ForEach(x => AddDescription(x(false)));
         PlayerManager.instance.player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         PlayerManager.instance.player.GetComponent<Rigidbody2D>().MovePosition(new Vector2(0f, -2.5f));
         spawner.GetComponent<EnemySpawner>().SpawnFromList();

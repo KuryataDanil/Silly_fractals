@@ -18,8 +18,8 @@ public class EnemySpawnPoint : MonoBehaviour
 
             if (Vector2.Distance(randomSpawnPoint, player_pos) > 2 && CheckCollision(randomSpawnPoint))
             {
-                Quaternion r_rotarion = Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f));
-                GameObject enemy = Instantiate(enemyPrefab, randomSpawnPoint, r_rotarion);
+                Quaternion rotarion = Quaternion.LookRotation(Vector3.forward, Quaternion.Euler(0, 0, 90) * (PlayerManager.instance.player.transform.position - randomSpawnPoint));
+                GameObject enemy = Instantiate(enemyPrefab, randomSpawnPoint, rotarion);
                 StartCoroutine(EnemyAwake(enemy));
                 EnemiesManager.instance.listOfEnemies.Add(enemy);
                 EnemiesManager.instance.listOfStats.Add(enemy.GetComponent<EnemyStats>());
