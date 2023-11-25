@@ -42,9 +42,31 @@ public class EnemiesManager : MonoBehaviour
 
     public void OpenHatches()
     {
+        Debug.Log("OPEN");
+        int rand = Random.Range(0, 100);
+        int cntOfMods = 1;
+
+        if (rand == 0)
+            cntOfMods = 3;
+        else if (rand <= 9)
+            cntOfMods = 2;
+
         foreach (Hatch hatch in hatches)
         {
+            for (int i = 0; i < cntOfMods; i++)
+            {
+                int mod_ind = Random.Range(0, listOfModifiers.Count);
+                hatch.AddModifier(listOfModifiers[mod_ind]);
+            }
             hatch.OpenHatch();
+        }
+    }
+
+    public void CloseHatches()
+    {
+        foreach (Hatch hatch in hatches)
+        {
+            hatch.CloseHatch();
         }
     }
 }

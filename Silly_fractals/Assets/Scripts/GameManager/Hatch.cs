@@ -12,9 +12,15 @@ public class Hatch : MonoBehaviour
     private bool _isOpened = false;
     private Text _desc;
 
+    [SerializeField]
+    private Sprite[] sprites;
+    private SpriteRenderer spriteRenderer;
+    
+
     private void Start()
     {
-        listOfModifiers = EnemyModifiers.listOfModifiers;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        listOfModifiers = new List<EnemyModifiers.AddModifier>();
         spawner = EnemiesManager.instance.spawner;
 
         Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
@@ -26,8 +32,8 @@ public class Hatch : MonoBehaviour
 
         text.transform.GetChild(0).GetComponent<Text>().text = "На следующем уровне";
         _desc = text.transform.GetChild(1).GetComponent<Text>();
-        listOfModifiers.ForEach(x => AddDescription(x(true)));
-        _desc.text = description;
+        //listOfModifiers.ForEach(x => AddDescription(x(true)));
+        //_desc.text = description;
 
         text.SetActive(false);
     }
@@ -45,7 +51,7 @@ public class Hatch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Player")
+        if (!_isOpened || collision.tag != "Player")
             return;
 
 
@@ -57,14 +63,35 @@ public class Hatch : MonoBehaviour
         description += s + '\n';
     }
 
-    public void OpenHatch()
+    public void AddModifier(EnemyModifiers.AddModifier modifier)
     {
-        _isOpened = true;
+        if (listOfModifiers.Contains(modifier))
+            return;
+        listOfModifiers.Add(modifier);
     }
 
-    private void CloseHatch()
+    public void OpenHatch()
     {
+        listOfModifiers.ForEach(x => AddDescription(x(true)));
+        _desc.text = description;
+
+        StartCoroutine(OpenHatchPLZ());
+    }
+
+    IEnumerator OpenHatchPLZ()
+    {
+        while (Vector2.Distance((Vector2)PlayerManager.instance.player.transform.position, (Vector2)transform.position) <= 4f)
+            yield return new WaitForEndOfFrame();
+        _isOpened = true;
+        spriteRenderer.sprite = sprites[1];
+    }
+
+    public void CloseHatch()
+    {
+        description = "";
         _isOpened = false;
+        spriteRenderer.sprite = sprites[0];
+        listOfModifiers = new List<EnemyModifiers.AddModifier>();
     }
 
     IEnumerator Blackout()
@@ -80,7 +107,7 @@ public class Hatch : MonoBehaviour
         }
 
         text.SetActive(false);
-        CloseHatch();
+        EnemiesManager.instance.CloseHatches();
         listOfModifiers.ForEach(x => AddDescription(x(false)));
         PlayerManager.instance.player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         PlayerManager.instance.player.GetComponent<Rigidbody2D>().MovePosition(new Vector2(0f, -2.5f));
