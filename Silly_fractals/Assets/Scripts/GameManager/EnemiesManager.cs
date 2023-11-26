@@ -69,4 +69,12 @@ public class EnemiesManager : MonoBehaviour
             hatch.CloseHatch();
         }
     }
+
+    public void HatchesTextOff()
+    {
+        foreach (Hatch hatch in hatches)
+        {
+            hatch.TextOff();
+        }
+    }
 }

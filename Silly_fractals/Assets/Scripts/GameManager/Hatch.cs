@@ -40,7 +40,7 @@ public class Hatch : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (_isOpened)
+        if (_isOpened && !PauseMenu.GameIsPaused)
             text.SetActive(true);
     }
 
@@ -56,6 +56,11 @@ public class Hatch : MonoBehaviour
 
 
         StartCoroutine(Blackout());
+    }
+
+    public void TextOff()
+    {
+        text.SetActive(false);
     }
 
     private void AddDescription(string s)
