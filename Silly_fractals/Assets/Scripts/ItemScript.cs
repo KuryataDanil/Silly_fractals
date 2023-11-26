@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 using System.Linq;
+using UnityEngine.UI;
 
 public class ItemScript : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class ItemScript : MonoBehaviour
 
     void Start()
     {
+        EnemiesManager.instance.AddActiveObj(gameObject);
         stats = PlayerManager.instance.player.GetComponent<PlayerStats>();
         Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
         text = Instantiate(PlayerManager.instance.itemText, PlayerManager.instance.canvas.transform);
@@ -21,6 +23,9 @@ public class ItemScript : MonoBehaviour
 
         RectTransform rectTransform = text.GetComponent<RectTransform>();
         rectTransform.position = screenPoint + new Vector2(0, (Camera.main.pixelHeight / 7f));
+
+        text.transform.GetChild(0).GetComponent<Text>().text = GetName;
+        text.transform.GetChild(1).GetComponent<Text>().text = GetDescription;
 
         text.SetActive(false);
 
@@ -60,6 +65,8 @@ public class ItemScript : MonoBehaviour
         }
         Inventory.instance.UpdateText(this);
         UpdateStats(stats);
+        StatsHUD.instance.UpdateStatsHUD();
+        EnemiesManager.instance.RemoveActiveObj(gameObject);
         Destroy(gameObject);
         Destroy(text);
     }

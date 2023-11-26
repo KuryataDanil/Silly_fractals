@@ -43,7 +43,19 @@ public class EnemyStats : MonoBehaviour
     {
         gameObject.SetActive(false);
         Debug.Log(name + " DEAD");
-        DropCoin();
+        Drop();
+        EnemiesManager.instance.CheckEnemiesAreDead();
+    }
+
+    void Drop()
+    {
+        PlayerStats p_stats = PlayerManager.instance.player.GetComponent<PlayerStats>();
+        int n = Random.Range(0, 100);
+
+        if (n < p_stats.moneyLuck)
+            DropCoin();
+        else if (n < p_stats.moneyLuck + p_stats.heartLuck)
+            DropHeart();
     }
 
     void DropCoin()
@@ -52,24 +64,25 @@ public class EnemyStats : MonoBehaviour
         int itemInd = 0;
         switch (n)
         {
-            case <= 29:
-                itemInd = 0;
-                break;
-            case <= 35:
-                itemInd = 1;
-                break;
-            case <= 38:
+            case 0:
                 itemInd = 2;
                 break;
-            case <= 53:
-                itemInd = 3;
-                break;
-            case <= 68:
-                itemInd = 4;
+            case < 10:
+                itemInd = 1;
                 break;
             default:
-                return;
+                break;
+
         }
+        Instantiate(drop[itemInd], transform.position, transform.rotation);
+    }
+
+    void DropHeart()
+    {
+        int n = Random.Range(0, 100);
+        int itemInd = 3;
+        if (n < 30)
+            itemInd = 4;
         Instantiate(drop[itemInd], transform.position, transform.rotation);
     }
 

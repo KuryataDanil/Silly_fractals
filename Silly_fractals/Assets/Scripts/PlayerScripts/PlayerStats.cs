@@ -10,11 +10,16 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField]
     private int money;
+
     public int max_health;
+
     public Stat damage;
     public Stat speed;
     public Stat fire_rate;
     public Stat bulletSpeed;
+    public int moneyLuck;
+    public int heartLuck;
+
     public int multyshot;
     public int ricochet;
     public int bulletPenetration;

@@ -13,6 +13,10 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         spawnPoints = GetComponentsInChildren<EnemySpawnPoint>();
+    }
+
+    public void FirstSpawn()
+    {
         SpawnNewEnemies(enemyCount);
     }
 

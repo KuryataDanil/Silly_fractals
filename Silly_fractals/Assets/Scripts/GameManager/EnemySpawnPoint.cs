@@ -16,11 +16,13 @@ public class EnemySpawnPoint : MonoBehaviour
         while (true) { 
             Vector3 randomSpawnPoint = GenerateRandomPosition();
 
-            if (Vector2.Distance(randomSpawnPoint, player_pos) > 4 && CheckCollision(randomSpawnPoint))
+            if (Vector2.Distance(randomSpawnPoint, player_pos) > 2 && CheckCollision(randomSpawnPoint))
             {
-                Quaternion r_rotarion = Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f));
-                GameObject enemy = Instantiate(enemyPrefab, randomSpawnPoint, r_rotarion);
+                Quaternion rotarion = Quaternion.LookRotation(Vector3.forward, Quaternion.Euler(0, 0, 90) * (PlayerManager.instance.player.transform.position - randomSpawnPoint));
+                GameObject enemy = Instantiate(enemyPrefab, randomSpawnPoint, rotarion);
+                StartCoroutine(EnemyAwake(enemy));
                 EnemiesManager.instance.listOfEnemies.Add(enemy);
+                EnemiesManager.instance.listOfStats.Add(enemy.GetComponent<EnemyStats>());
                 break;
             }
         }
@@ -36,16 +38,23 @@ public class EnemySpawnPoint : MonoBehaviour
         {
             Vector2 randomSpawnPoint = GenerateRandomPosition();
 
-            if (Vector2.Distance(randomSpawnPoint, player_pos) > 4 && CheckCollision(randomSpawnPoint))
+            if (Vector2.Distance(randomSpawnPoint, player_pos) > 2 && CheckCollision(randomSpawnPoint))
             {
-                Quaternion r_rotarion = Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f));
                 enemy.transform.position = randomSpawnPoint;
-                enemy.transform.rotation = r_rotarion;
+                enemy.transform.rotation = Quaternion.LookRotation(Vector3.forward, Quaternion.Euler(0, 0, 90) * (new Vector3(0f, -2.5f, enemy.transform.position.z) - enemy.transform.position));
                 enemy.SetActive(true);
+                StartCoroutine(EnemyAwake(enemy));
                 break;
             }
         }
         return true;
+    }
+
+    IEnumerator EnemyAwake(GameObject enemy)
+    {
+        enemy.GetComponent<EnemyController>().enabled = false;
+        yield return new WaitForSeconds(1);
+        enemy.GetComponent<EnemyController>().enabled = true;
     }
 
     Vector3 GenerateRandomPosition()
