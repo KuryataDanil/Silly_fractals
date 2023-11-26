@@ -13,7 +13,7 @@ public class Trader : MonoBehaviour
     public int max_tables_count;
     private int minPrice = 2;
 
-    private void Start()
+    private void Awake()
     {
         int n = transform.childCount;
         tables = new GameObject[n];
@@ -27,6 +27,11 @@ public class Trader : MonoBehaviour
 
     private void OnEnable()
     {
+        if (EnemiesManager.instance.Depth == 1)
+        {
+            StartTrade();
+            return;
+        }
         trader_menu.SetActive(true);
         PlayerManager.instance.player.GetComponent<Shooting>().enabled = false;
     }
@@ -56,13 +61,13 @@ public class Trader : MonoBehaviour
         tables[n].GetComponent<Table>().priceMod = 0.5f;
 
         minPrice += 2;
+        StartTrade();
     }
 
     public void DontIncMinPrice()
     {
         StartTrade();
     }
-    
 
     private void StartTrade()
     {
@@ -77,5 +82,7 @@ public class Trader : MonoBehaviour
         {
             tables[i].SetActive(true);
         }
+
+        EnemiesManager.instance.OpenHatches();
     }
 }

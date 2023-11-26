@@ -45,7 +45,6 @@ public class EnemiesManager : MonoBehaviour
     {
         if (listOfEnemies.TrueForAll(x => !x.activeSelf))
         {
-            OpenHatches();
             trader.SetActive(true);
         }
     }

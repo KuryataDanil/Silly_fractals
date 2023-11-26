@@ -31,6 +31,12 @@ public class PlayerManager : MonoBehaviour
     {
         segments = player.transform.GetChild(1).GetComponentsInChildren<SpriteRenderer>();
         curSeg = 0;
+
+        UnityEngine.UI.Image sprite_rend = GameObject.Find("BlackOut").GetComponent<UnityEngine.UI.Image>();
+        Color tempColor = sprite_rend.color;
+        tempColor.a = 1f;
+        sprite_rend.color = tempColor;
+
     }
 
     public void ColorSegment(Color color)
