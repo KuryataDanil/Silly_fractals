@@ -10,6 +10,8 @@ public class ItemScript : MonoBehaviour
     private PlayerStats stats;
     private GameObject text;
 
+    public bool ForTrade = false;
+
     [SerializeField]
     protected Color color;
 
@@ -33,6 +35,8 @@ public class ItemScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (ForTrade)
+            return;
         if (other.tag == "Player")
         {
             MoveToPlayer(other.transform);
@@ -49,7 +53,7 @@ public class ItemScript : MonoBehaviour
         text.SetActive(false);
     }
 
-    private async void MoveToPlayer(Transform target)
+    public async void MoveToPlayer(Transform target)
     {
         while (Vector2.Distance((Vector2)transform.position, (Vector2)target.position) > 0.05f)
         {
@@ -66,8 +70,7 @@ public class ItemScript : MonoBehaviour
         Inventory.instance.UpdateText(this);
         UpdateStats(stats);
         StatsHUD.instance.UpdateStatsHUD();
-        EnemiesManager.instance.RemoveActiveObj(gameObject);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
         Destroy(text);
     }
 

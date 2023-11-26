@@ -21,6 +21,8 @@ public class EnemiesManager : MonoBehaviour
     [HideInInspector]
     public List<EnemyStats> listOfStats;
 
+    public List<GameObject> items;
+
     public GameObject trader;
 
     public GameObject spawner;
@@ -46,7 +48,14 @@ public class EnemiesManager : MonoBehaviour
         if (listOfEnemies.TrueForAll(x => !x.activeSelf))
         {
             trader.SetActive(true);
+            SpawnItem();
         }
+    }
+
+    private void SpawnItem()
+    {
+        int r = Random.Range(0, items.Count);
+        GameObject item = Instantiate(items[r], new Vector3(0, -5, 0), Quaternion.identity);
     }
 
     public void OpenHatches()

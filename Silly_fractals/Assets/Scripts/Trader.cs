@@ -15,6 +15,7 @@ public class Trader : MonoBehaviour
 
     private void Awake()
     {
+        listOfItemsForSell = listOfItemsForSell.Concat(EnemiesManager.instance.items).ToList();
         int n = transform.childCount;
         tables = new GameObject[n];
         for (int i = 0; i < n; i++)
@@ -38,6 +39,10 @@ public class Trader : MonoBehaviour
 
     private void OnDisable()
     {
+        foreach (GameObject table in tables)
+        {
+            table.SetActive(false);
+        }
         GetComponent<Collider2D>().enabled = true;
     }
 

@@ -1,4 +1,4 @@
-public class DashUp : ItemScript
+public class DashUP : ItemScript
 {
     public override string GetName { get { return "Рывок"; } }
 

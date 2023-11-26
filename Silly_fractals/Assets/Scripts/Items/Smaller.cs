@@ -17,10 +17,10 @@ public class Smaller : ItemScript
     private async void ChangeSize(Transform target)
     {
         float Timer = 0;
-        Vector3 Base = transform.localScale;
+        Vector3 Base = PlayerManager.instance.player.transform.localScale;
         while (Timer < 1)
         {
-            transform.localScale = Vector3.Lerp(Base, Base * 0.7f, Timer);
+            PlayerManager.instance.player.transform.localScale = Vector3.Lerp(Base, Base * 0.7f, Timer);
             Timer += Time.deltaTime;
             await Task.Yield();
         }

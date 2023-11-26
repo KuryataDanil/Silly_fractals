@@ -18,9 +18,16 @@ public class DialogueTrigger : MonoBehaviour
     IEnumerator TriggerDialogue()
     {
         DialogueManager manager = FindObjectOfType<DialogueManager>();
-        while (manager.transform.position.y > 250)
+        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, transform.position);
+
+
+        RectTransform rectTransform = manager.GetComponent<RectTransform>();
+        Vector3 destination = screenPoint + new Vector2(0, (Camera.main.pixelHeight / 4f));
+
+       
+        while (Vector2.Distance(rectTransform.position, destination) > 10)
         {
-            manager.transform.position -= new Vector3(0, 4, 0);
+            rectTransform.position +=  (destination - rectTransform.position).normalized * 4;
             yield return null;
         }
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);

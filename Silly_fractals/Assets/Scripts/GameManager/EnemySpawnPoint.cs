@@ -11,7 +11,7 @@ public class EnemySpawnPoint : MonoBehaviour
     public bool SpawnEnemy(GameObject enemyPrefab)
     {
         Vector3 player_pos = PlayerManager.instance.player.transform.position;
-        if (Vector2.Distance(transform.position, player_pos) < 4)
+        if (Vector2.Distance(transform.position, player_pos) < 3)
             return false;
         while (true) { 
             Vector3 randomSpawnPoint = GenerateRandomPosition();
@@ -32,7 +32,7 @@ public class EnemySpawnPoint : MonoBehaviour
     public bool EnableEnemy(GameObject enemy)
     {
         Vector3 player_pos = PlayerManager.instance.player.transform.position;
-        if (Vector2.Distance(transform.position, player_pos) < 4)
+        if (Vector2.Distance(transform.position, player_pos) < 3)
             return false;
         while (true)
         {
