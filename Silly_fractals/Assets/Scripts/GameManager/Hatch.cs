@@ -111,6 +111,7 @@ public class Hatch : MonoBehaviour
             sprite_rend.color = tempColor;
         }
 
+        EnemiesManager.instance.DestroyActiveObjs();
         text.SetActive(false);
         listOfModifiers.ForEach(x => x(false));
         EnemiesManager.instance.CloseHatches();

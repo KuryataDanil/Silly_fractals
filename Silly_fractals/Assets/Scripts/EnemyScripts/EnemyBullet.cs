@@ -11,6 +11,7 @@ public class EnemyBullet : MonoBehaviour
 
     void Start()
     {
+        EnemiesManager.instance.AddActiveObj(gameObject);
         stats = PlayerManager.instance.player.GetComponent<PlayerStats>();
         Destroy(gameObject, lifeTime);
     }
@@ -33,6 +34,7 @@ public class EnemyBullet : MonoBehaviour
 
     void DestroyBullet()
     {
+        EnemiesManager.instance.RemoveActiveObj(gameObject);
         Destroy(gameObject);
     }
 }

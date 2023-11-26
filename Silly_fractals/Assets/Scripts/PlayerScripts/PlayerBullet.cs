@@ -8,6 +8,7 @@ public class PlayerBullet : MonoBehaviour
 
     void Start()
     {
+        EnemiesManager.instance.AddActiveObj(gameObject);
         damage = PlayerManager.instance.player.GetComponent<PlayerStats>().damage.GetValue;
     }
 
@@ -29,6 +30,7 @@ public class PlayerBullet : MonoBehaviour
 
     void DestroyBullet()
     {
+        EnemiesManager.instance.RemoveActiveObj(gameObject);
         Destroy(gameObject);
     }
 }

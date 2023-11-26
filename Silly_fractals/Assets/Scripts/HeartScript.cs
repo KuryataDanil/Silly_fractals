@@ -11,6 +11,7 @@ public class HeartScript : MonoBehaviour
 
     void Start()
     {
+        EnemiesManager.instance.AddActiveObj(gameObject);
         stats = PlayerManager.instance.player.GetComponent<PlayerStats>();
     }
 
@@ -23,6 +24,14 @@ public class HeartScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag == "Hatch")
+        {
+            GetComponent<Rigidbody2D>().AddForce(((Vector2)(transform.position - collider.transform.position)).normalized * 30, ForceMode2D.Force);
+        }
+    }
+
     private async void MoveToPlayer(Transform target)
     {
         while (Vector2.Distance((Vector2)transform.position, (Vector2)target.position) > 0.05f)
@@ -31,6 +40,7 @@ public class HeartScript : MonoBehaviour
             await Task.Yield();
         }
         stats.Heal(health);
-        gameObject.SetActive(false);
+        EnemiesManager.instance.RemoveActiveObj(gameObject);
+        Destroy(gameObject);
     }
 }

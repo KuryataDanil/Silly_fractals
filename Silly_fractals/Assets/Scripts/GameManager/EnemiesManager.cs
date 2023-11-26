@@ -27,9 +27,12 @@ public class EnemiesManager : MonoBehaviour
 
     private List<EnemyModifiers.AddModifier> listOfModifiers;
 
+    private List<GameObject> objectsOnScene;
+
     private void Start()
     {
         listOfModifiers = EnemyModifiers.listOfModifiers;
+        objectsOnScene = new List<GameObject>();
     }
 
     public void CheckEnemiesAreDead()
@@ -75,6 +78,25 @@ public class EnemiesManager : MonoBehaviour
         foreach (Hatch hatch in hatches)
         {
             hatch.TextOff();
+        }
+    }
+
+    public void AddActiveObj(GameObject gameObject)
+    {
+        objectsOnScene.Add(gameObject);
+    }
+
+    public void RemoveActiveObj(GameObject gameObject)
+    {
+        objectsOnScene.Remove(gameObject);
+    }
+
+    public void DestroyActiveObjs()
+    {
+        foreach (GameObject obj in objectsOnScene)
+        {
+            Destroy(obj);
+            objectsOnScene = new List<GameObject>();
         }
     }
 }
