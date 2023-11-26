@@ -13,6 +13,12 @@ public class ButtonManager : MonoBehaviour
         StartCoroutine(Blackout(sceneName));
     }
 
+
+    public void Exit()
+    {
+        Debug.Log("�����");
+        Application.Quit();
+
     IEnumerator Blackout(string sceneName)
     {
         UnityEngine.UI.Image sprite_rend = blackOut.GetComponent<UnityEngine.UI.Image>();
