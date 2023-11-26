@@ -21,6 +21,8 @@ public class EnemiesManager : MonoBehaviour
     [HideInInspector]
     public List<EnemyStats> listOfStats;
 
+    public GameObject trader;
+
     public GameObject spawner;
 
     public Hatch[] hatches;
@@ -44,6 +46,7 @@ public class EnemiesManager : MonoBehaviour
         if (listOfEnemies.TrueForAll(x => !x.activeSelf))
         {
             OpenHatches();
+            trader.SetActive(true);
         }
     }
 
@@ -71,6 +74,7 @@ public class EnemiesManager : MonoBehaviour
 
     public void CloseHatches()
     {
+        trader.SetActive(false);
         foreach (Hatch hatch in hatches)
         {
             hatch.CloseHatch();

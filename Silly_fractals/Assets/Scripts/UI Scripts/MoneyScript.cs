@@ -10,6 +10,7 @@ public class MoneyScript : MonoBehaviour
     void Start()
     {
         stats = PlayerManager.instance.player.GetComponent<PlayerStats>();
+        DrawMoneyCount();
     }
 
     private void OnEnable()

@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI;
     public GameObject settingsMenuUI;
+    public GameObject traderUI;
 
     
     void Update()
@@ -67,4 +68,9 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void CloseTraderUI()
+    {
+        traderUI.SetActive(false);
+        PlayerManager.instance.player.GetComponent<Shooting>().enabled = true;
+    }
 }
