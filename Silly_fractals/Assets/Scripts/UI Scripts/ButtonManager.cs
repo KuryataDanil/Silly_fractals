@@ -28,4 +28,9 @@ public class ButtonManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void Exit()
+    {
+        Debug.Log("Пока...");
+        Application.Quit();
+    }
 }
