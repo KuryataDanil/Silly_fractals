@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5f;
     public Rigidbody2D rb;
     Vector2 movement;
+
+    private Stat speed;
+
+
+    void Start()
+    {
+        speed = GetComponent<PlayerStats>().speed;
+    }
 
     void Update()
     {
@@ -16,7 +23,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
-
+        rb.AddForce(movement.normalized * speed.GetValue * 5);
     }
 }
