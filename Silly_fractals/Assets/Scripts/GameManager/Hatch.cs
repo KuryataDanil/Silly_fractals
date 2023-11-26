@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class Hatch : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class Hatch : MonoBehaviour
     [SerializeField]
     private Sprite[] sprites;
     private SpriteRenderer spriteRenderer;
-    
+
+    public static event Action OnLevelChanged;
 
     private void Start()
     {
@@ -111,6 +113,8 @@ public class Hatch : MonoBehaviour
             sprite_rend.color = tempColor;
         }
 
+        EnemiesManager.instance.IncDepth();
+        OnLevelChanged?.Invoke();
         EnemiesManager.instance.DestroyActiveObjs();
         text.SetActive(false);
         listOfModifiers.ForEach(x => x(false));

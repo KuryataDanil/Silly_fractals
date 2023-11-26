@@ -29,6 +29,10 @@ public class EnemiesManager : MonoBehaviour
 
     private List<GameObject> objectsOnScene;
 
+    private int depth = 1;
+    public int Depth { get { return depth; } }
+    public void IncDepth() { depth++; }
+
     private void Start()
     {
         listOfModifiers = EnemyModifiers.listOfModifiers;
