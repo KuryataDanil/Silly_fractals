@@ -20,7 +20,7 @@ public class Smaller : ItemScript
         Vector3 Base = PlayerManager.instance.player.transform.localScale;
         while (Timer < 1)
         {
-            PlayerManager.instance.player.transform.localScale = Vector3.Lerp(Base, Base * 1.1f, Timer);
+            PlayerManager.instance.player.transform.localScale = Vector3.Lerp(Base, Base * 0.9f, Timer);
             Timer += Time.deltaTime;
             await Task.Yield();
         }
