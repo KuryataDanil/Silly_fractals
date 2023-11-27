@@ -9,6 +9,6 @@ public class DamageUP_HealthDOWN : ItemScript
         stats.damage.AddModifier(0.5f);
         stats.max_health -= 2;
         if (stats.Health > stats.max_health)
-            stats.Heal(stats.Health - stats.max_health);
+            stats.Heal(stats.max_health - stats.Health);
     }
 }

@@ -19,11 +19,16 @@ public class Table : MonoBehaviour
     {
         int n = Random.Range(0, EnemiesManager.instance.trader.GetComponent<Trader>().listOfItemsForSell.Count);
         item = EnemiesManager.instance.trader.GetComponent<Trader>().listOfItemsForSell[n];
+        Debug.Log(item);
 
         int max_price = 15;
         if (item.TryGetComponent(out HeartScript t))
+        {
             max_price = 5;
-        else 
+            item = Instantiate(item, transform.position, transform.rotation);
+            t.enabled = false;
+        }
+        else
         {
             isItem = true;
             item = Instantiate(item, transform.position, transform.rotation);
@@ -45,6 +50,9 @@ public class Table : MonoBehaviour
             gameObject.SetActive(false);
             if (isItem)
                 itemScript.MoveToPlayer(PlayerManager.instance.player.transform);
+            else
+                item.GetComponent<HeartScript>().enabled = true;
+
             PlayerManager.instance.player.GetComponent<PlayerStats>().AddMoney(-price);
         }
     }

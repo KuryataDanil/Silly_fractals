@@ -27,6 +27,7 @@ public class PlayerStats : MonoBehaviour
     public float damageDependsOnHp;
     public float speedUpAfterDamage;
     public int dashCooldown;
+    public int lifes;
 
     private int health;
 
@@ -87,10 +88,14 @@ public class PlayerStats : MonoBehaviour
 
     void Die()
     {
-        Debug.Log(name + " DEAD");
-        sprite_rend.sprite = spriteArray[3];
-
-        this.enabled = false;
+        if (lifes <= 0)
+        {
+            Debug.Log(name + " DEAD");
+            sprite_rend.sprite = spriteArray[3];
+        }
+        lifes--;
+        max_health = 2;
+        health = 2;
     }
 
     public void Heal(int x)

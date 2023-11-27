@@ -54,7 +54,9 @@ public class EnemyStats : MonoBehaviour
 
         if (n < p_stats.moneyLuck)
             DropCoin();
-        else if (n < p_stats.moneyLuck + p_stats.heartLuck)
+
+        n = Random.Range(0, 100);
+        if (n < p_stats.heartLuck)
             DropHeart();
     }
 
