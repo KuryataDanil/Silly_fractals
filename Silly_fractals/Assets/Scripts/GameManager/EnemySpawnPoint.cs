@@ -16,7 +16,7 @@ public class EnemySpawnPoint : MonoBehaviour
         while (true) { 
             Vector3 randomSpawnPoint = GenerateRandomPosition();
 
-            if (Vector2.Distance(randomSpawnPoint, player_pos) > 2 && CheckCollision(randomSpawnPoint))
+            if (CheckCollision(randomSpawnPoint))
             {
                 Quaternion rotarion = Quaternion.LookRotation(Vector3.forward, Quaternion.Euler(0, 0, 90) * (PlayerManager.instance.player.transform.position - randomSpawnPoint));
                 GameObject enemy = Instantiate(enemyPrefab, randomSpawnPoint, rotarion);
@@ -38,7 +38,7 @@ public class EnemySpawnPoint : MonoBehaviour
         {
             Vector2 randomSpawnPoint = GenerateRandomPosition();
 
-            if (Vector2.Distance(randomSpawnPoint, player_pos) > 2 && CheckCollision(randomSpawnPoint))
+            if (CheckCollision(randomSpawnPoint))
             {
                 enemy.transform.position = randomSpawnPoint;
                 enemy.transform.rotation = Quaternion.LookRotation(Vector3.forward, Quaternion.Euler(0, 0, 90) * (new Vector3(0f, -2.5f, enemy.transform.position.z) - enemy.transform.position));

@@ -40,6 +40,7 @@ public class PlayerStats : MonoBehaviour
     public static event Action OnPlayerDamaged;
     public static event Action OnMoneyChanged;
 
+    private bool godMode = false;
 
     private AudioSource sound;
 
@@ -52,6 +53,8 @@ public class PlayerStats : MonoBehaviour
     
     public void TakeDamage(float dmg)
     {
+        if (godMode)
+            return;
         if (_invincible)
             return;
         InvincibleTime();
@@ -147,5 +150,10 @@ public class PlayerStats : MonoBehaviour
     {
         this.money += money;
         OnMoneyChanged?.Invoke();
+    }
+    
+    public void SetGodMode()
+    {
+        godMode = !godMode;
     }
 }

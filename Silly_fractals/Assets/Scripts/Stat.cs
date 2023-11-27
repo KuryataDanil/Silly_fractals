@@ -32,6 +32,7 @@ public class Stat
     }
 }
 
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(Stat))]
 public class MyScriptDrawer : PropertyDrawer
 {
@@ -41,3 +42,4 @@ public class MyScriptDrawer : PropertyDrawer
         EditorGUI.PropertyField(position, property.FindPropertyRelative("baseValue"), GUIContent.none);
     }
 }
+#endif
