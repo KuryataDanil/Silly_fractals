@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Bigger : ItemScript
 {
-    public override string GetName { get { return "Уменьшение"; } }
+    public override string GetName { get { return "Увеличение"; } }
 
-    public override string GetDescription { get { return "Вы уменьшаетесь   +30% скорости   -30% урона"; } }
+    public override string GetDescription { get { return "Вы увеличиваетесь   +30% урона   -30% скорости"; } }
 
     public override void UpdateStats(PlayerStats stats)
     {
@@ -20,7 +20,7 @@ public class Bigger : ItemScript
         Vector3 Base = PlayerManager.instance.player.transform.localScale;
         while (Timer < 1)
         {
-            PlayerManager.instance.player.transform.localScale = Vector3.Lerp(Base, Base * 1.3f, Timer);
+            PlayerManager.instance.player.transform.localScale = Vector3.Lerp(Base, Base * 1.1f, Timer);
             Timer += Time.deltaTime;
             await Task.Yield();
         }

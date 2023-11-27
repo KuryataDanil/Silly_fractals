@@ -40,8 +40,12 @@ public class PlayerStats : MonoBehaviour
     public static event Action OnPlayerDamaged;
     public static event Action OnMoneyChanged;
 
+
+    private AudioSource sound;
+
     void Awake()
     {
+        sound = GameObject.Find("HpDown").GetComponent<AudioSource>();
         health = max_health;
         sprite_rend = GetComponent<SpriteRenderer>();
     }
@@ -52,7 +56,7 @@ public class PlayerStats : MonoBehaviour
             return;
         InvincibleTime();
 
-
+        sound.Play();
         health -= Mathf.RoundToInt(dmg);
         OnPlayerDamaged?.Invoke();
         ChangeSprite();
@@ -91,6 +95,9 @@ public class PlayerStats : MonoBehaviour
         if (lifes <= 0)
         {
             GameObject.Find("Canvas").GetComponent<PauseMenu>().DeathScreen.SetActive(true);
+            GetComponent<PlayerController>().enabled = false;
+            GetComponent<PlayerRotation>().enabled = false;
+            GetComponent<Shooting>().enabled = false;
             sprite_rend.sprite = spriteArray[3];
             return;
         }

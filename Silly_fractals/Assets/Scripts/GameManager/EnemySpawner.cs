@@ -64,8 +64,8 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawnBoss()
     {
-        PlayerManager.instance.player.GetComponent<Rigidbody2D>().MovePosition(new Vector3(0, -1.5f, 0));
-        boss = Instantiate(boss, new Vector3(0, 0, 0), Quaternion.identity);
+        PlayerManager.instance.player.GetComponent<Rigidbody2D>().MovePosition(new Vector3(0, -5f, 0));
+        boss = Instantiate(boss, new Vector3(0, 1.5f, 0), Quaternion.Euler(0, 0, -90));
         StartCoroutine(EnemyAwake(boss));
     }
 
