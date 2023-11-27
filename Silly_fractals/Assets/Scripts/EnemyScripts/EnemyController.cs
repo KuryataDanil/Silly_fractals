@@ -28,7 +28,10 @@ public class EnemyController : MonoBehaviour
         coolDown = 1 / stats.fire_rate.GetValue;
         lookRadius = stats.lookRadius.GetValue;
         shootDistance = stats.shootDistance.GetValue;
-        bulletPrefab.GetComponent<EnemyBullet>().damage = stats.damage.GetValue;
+        EnemyBullet b_script = bulletPrefab.GetComponent<EnemyBullet>();
+        b_script.damage = stats.damage.GetValue;
+        b_script.rico = stats.rico;
+        b_script.penetration = stats.bulletPenetration;
         multiShot = stats.multyshot;
 
         rb = GetComponent<Rigidbody2D>();

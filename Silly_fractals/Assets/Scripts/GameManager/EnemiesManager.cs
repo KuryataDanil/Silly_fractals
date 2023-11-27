@@ -111,6 +111,7 @@ public class EnemiesManager : MonoBehaviour
     {
         foreach (GameObject obj in objectsOnScene)
         {
+            Debug.Log(obj);
             Destroy(obj);
             objectsOnScene = new List<GameObject>();
         }

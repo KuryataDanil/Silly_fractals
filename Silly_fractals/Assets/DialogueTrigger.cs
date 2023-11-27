@@ -6,13 +6,16 @@ public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
 
+    float _timer = 5;
+
     private void Update()
     {
-        if (Vector2.Distance((Vector2)PlayerManager.instance.player.transform.position, (Vector2)transform.position) < 3)
+        if (Vector2.Distance((Vector2)PlayerManager.instance.player.transform.position, (Vector2)transform.position) < 3 || _timer < 0)
         {
             StartCoroutine(TriggerDialogue());
             this.enabled = false;
         }
+        _timer -= Time.deltaTime;
     }
 
     IEnumerator TriggerDialogue()

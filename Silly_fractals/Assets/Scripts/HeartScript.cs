@@ -9,7 +9,7 @@ public class HeartScript : MonoBehaviour
     [SerializeField]
     private int health;
 
-    void Start()
+    void OnEnable()
     {
         EnemiesManager.instance.AddActiveObj(gameObject);
         stats = PlayerManager.instance.player.GetComponent<PlayerStats>();
@@ -40,7 +40,6 @@ public class HeartScript : MonoBehaviour
             await Task.Yield();
         }
         stats.Heal(health);
-        EnemiesManager.instance.RemoveActiveObj(gameObject);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

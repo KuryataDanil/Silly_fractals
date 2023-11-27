@@ -12,6 +12,8 @@ public class EnemyStats : MonoBehaviour
     public Stat lookRadius;
     public Stat shootDistance;
     public Stat bulletSpeed;
+    public int rico;
+    public int bulletPenetration;
 
     public GameObject[] drop; 
 

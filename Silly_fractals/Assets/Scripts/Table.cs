@@ -26,7 +26,7 @@ public class Table : MonoBehaviour
         {
             max_price = 5;
             item = Instantiate(item, transform.position, transform.rotation);
-            t.enabled = false;
+            item.GetComponent<HeartScript>().enabled = false;
         }
         else
         {
