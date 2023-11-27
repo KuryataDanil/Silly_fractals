@@ -84,7 +84,7 @@ public class EnemyController : MonoBehaviour
         if (Time.time - lastShotTime < coolDown)
             return;
         lastShotTime = Time.time;
-
+        GetComponent<AudioSource>().Play();
         Vector3 bulletPos = transform.position + (transform.up * 0.5f);
         Vector3 bulletRot = new Vector3(0, 0, +45);
         for (int i = 0; i <= multiShot; i++)

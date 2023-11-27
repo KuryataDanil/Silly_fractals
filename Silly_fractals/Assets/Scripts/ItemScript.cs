@@ -67,6 +67,7 @@ public class ItemScript : MonoBehaviour
             Inventory.instance.DrawItems();
             PlayerManager.instance.ColorSegment(color);
         }
+        PlayerManager.instance.gameObject.GetComponent<AudioSource>().Play();
         Inventory.instance.UpdateText(this);
         UpdateStats(stats);
         StatsHUD.instance.UpdateStatsHUD();

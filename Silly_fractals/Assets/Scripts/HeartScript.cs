@@ -39,6 +39,7 @@ public class HeartScript : MonoBehaviour
             transform.position = Vector2.MoveTowards((Vector2)transform.position, (Vector2)target.position, 3 * Time.fixedDeltaTime);
             await Task.Yield();
         }
+        EnemiesManager.instance.spawner.GetComponent<AudioSource>().Play();
         stats.Heal(health);
         gameObject.SetActive(false);
     }

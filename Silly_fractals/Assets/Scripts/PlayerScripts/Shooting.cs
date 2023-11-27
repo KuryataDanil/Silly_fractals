@@ -11,11 +11,14 @@ public class Shooting : MonoBehaviour
     private float lastShotTime;
     private Stat fire_rate;
 
+    private AudioSource sound;
+
     void Start()
     {
         bulletSpeed = GetComponent<PlayerStats>().bulletSpeed;
         multiShot = GetComponent<PlayerStats>().multyshot;
         fire_rate = GetComponent<PlayerStats>().fire_rate;
+        sound = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -32,6 +35,7 @@ public class Shooting : MonoBehaviour
             return;
         lastShotTime = Time.time;
 
+        sound.Play();
         Vector3 bulletPos = firePoint.position + (-transform.right * 0.5f);
         for (int i = 0; i <= multiShot; i++)
         {

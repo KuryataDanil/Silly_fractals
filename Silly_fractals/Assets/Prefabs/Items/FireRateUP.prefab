@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6785853436162191459}
   - component: {fileID: 2104603285502960424}
   - component: {fileID: 2745041204832970854}
+  - component: {fileID: -1034347555066663844}
   m_Layer: 0
   m_Name: FireRateUP
   m_TagString: Untagged
@@ -132,3 +133,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-1034347555066663844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846072463481294822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e2c3061cbe0174f9fff7f18f5be5cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForTrade: 0
+  color: {r: 0.58514786, g: 0.31470275, b: 0.6132076, a: 1}

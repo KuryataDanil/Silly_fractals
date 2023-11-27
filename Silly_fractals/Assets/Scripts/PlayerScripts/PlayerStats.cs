@@ -92,10 +92,12 @@ public class PlayerStats : MonoBehaviour
         {
             GameObject.Find("Canvas").GetComponent<PauseMenu>().DeathScreen.SetActive(true);
             sprite_rend.sprite = spriteArray[3];
+            return;
         }
         lifes--;
         max_health = 2;
         health = 2;
+        OnPlayerDamaged?.Invoke();
     }
 
     public void Heal(int x)
