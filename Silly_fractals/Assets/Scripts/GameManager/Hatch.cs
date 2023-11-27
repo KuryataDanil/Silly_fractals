@@ -55,7 +55,7 @@ public class Hatch : MonoBehaviour
     {
         if (!_isOpened || collision.tag != "Player")
             return;
-
+        _isOpened = false;
 
         StartCoroutine(Blackout());
     }

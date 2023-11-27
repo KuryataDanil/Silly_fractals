@@ -10,12 +10,9 @@ public class EnemySpawnPoint : MonoBehaviour
 
     public bool SpawnEnemy(GameObject enemyPrefab)
     {
-        Vector3 player_pos = PlayerManager.instance.player.transform.position;
-        if (Vector2.Distance(transform.position, player_pos) < 3)
-            return false;
         while (true) { 
             Vector3 randomSpawnPoint = GenerateRandomPosition();
-
+            int n = 0;
             if (CheckCollision(randomSpawnPoint))
             {
                 Quaternion rotarion = Quaternion.LookRotation(Vector3.forward, Quaternion.Euler(0, 0, 90) * (PlayerManager.instance.player.transform.position - randomSpawnPoint));
@@ -25,19 +22,19 @@ public class EnemySpawnPoint : MonoBehaviour
                 EnemiesManager.instance.listOfStats.Add(enemy.GetComponent<EnemyStats>());
                 break;
             }
+            n++;
+            if (n >= 20)
+                return false;
         }
         return true;
     }
 
     public bool EnableEnemy(GameObject enemy)
     {
-        Vector3 player_pos = PlayerManager.instance.player.transform.position;
-        if (Vector2.Distance(transform.position, player_pos) < 3)
-            return false;
         while (true)
         {
             Vector2 randomSpawnPoint = GenerateRandomPosition();
-
+            int n = 0;
             if (CheckCollision(randomSpawnPoint))
             {
                 enemy.transform.position = randomSpawnPoint;
@@ -46,6 +43,9 @@ public class EnemySpawnPoint : MonoBehaviour
                 StartCoroutine(EnemyAwake(enemy));
                 break;
             }
+            n++;
+            if (n >= 20)
+                return false;
         }
         return true;
     }
