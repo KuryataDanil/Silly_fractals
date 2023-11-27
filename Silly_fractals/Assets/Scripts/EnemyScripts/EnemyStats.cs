@@ -68,10 +68,10 @@ public class EnemyStats : MonoBehaviour
         int itemInd = 0;
         switch (n)
         {
-            case 0:
+            case <8:
                 itemInd = 2;
                 break;
-            case < 10:
+            case < 40:
                 itemInd = 1;
                 break;
             default:

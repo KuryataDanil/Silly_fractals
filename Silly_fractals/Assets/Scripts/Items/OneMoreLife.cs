@@ -7,5 +7,6 @@ public class OneMoreLife : ItemScript
     public override void UpdateStats(PlayerStats stats)
     {
         stats.lifes++;
+        stats.ChangeMaxHP();
     }
 }

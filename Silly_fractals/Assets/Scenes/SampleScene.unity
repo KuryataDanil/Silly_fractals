@@ -12136,7 +12136,7 @@ MonoBehaviour:
     baseValue: 2
   bulletSpeed:
     baseValue: 10
-  moneyLuck: 30
+  moneyLuck: 60
   heartLuck: 30
   multyshot: 0
   ricochet: 0

@@ -62,7 +62,7 @@ public class Trader : MonoBehaviour
 
     public void HalfPrice()
     {
-        int n = Random.Range(0, tables.Length);
+        int n = Random.Range(0, cur_tables_count);
         tables[n].GetComponent<Table>().priceMod = 0.5f;
 
         minPrice += 2;

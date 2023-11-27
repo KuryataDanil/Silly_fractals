@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   max_health:
-    baseValue: 20
+    baseValue: 30
   damage:
     baseValue: 1
   speed:

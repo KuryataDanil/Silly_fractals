@@ -107,6 +107,7 @@ public class PlayerStats : MonoBehaviour
         lifes--;
         max_health = 2;
         health = 2;
+        ChangeSprite();
         OnPlayerDamaged?.Invoke();
     }
 
@@ -155,5 +156,10 @@ public class PlayerStats : MonoBehaviour
     public void SetGodMode()
     {
         godMode = !godMode;
+    }
+
+    public void ChangeMaxHP()
+    {
+        OnPlayerDamaged?.Invoke();
     }
 }
