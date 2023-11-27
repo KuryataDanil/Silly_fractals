@@ -90,7 +90,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (lifes <= 0)
         {
-            Debug.Log(name + " DEAD");
+            GameObject.Find("Canvas").GetComponent<PauseMenu>().DeathScreen.SetActive(true);
             sprite_rend.sprite = spriteArray[3];
         }
         lifes--;

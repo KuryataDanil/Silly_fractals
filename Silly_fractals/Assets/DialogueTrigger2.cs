@@ -2,20 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueTrigger : MonoBehaviour
+public class DialogueTrigger2 : MonoBehaviour
 {
     public Dialogue dialogue;
 
-    float _timer = 5;
-
-    private void Update()
+    private void OnEnable()
     {
-        if (Vector2.Distance((Vector2)PlayerManager.instance.player.transform.position, (Vector2)transform.position) < 3 || _timer < 0)
-        {
-            StartCoroutine(TriggerDialogue());
-            this.enabled = false;
-        }
-        _timer -= Time.deltaTime;
+        StartCoroutine(TriggerDialogue());
     }
 
     IEnumerator TriggerDialogue()
@@ -33,6 +26,8 @@ public class DialogueTrigger : MonoBehaviour
             rectTransform.position +=  (destination - rectTransform.position).normalized * 4;
             yield return null;
         }
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue, false);
+        FindObjectOfType<DialogueManager>().StartDialogue(dialogue, true);
     }
+
+    
 }

@@ -21,6 +21,8 @@ public class EnemiesManager : MonoBehaviour
     [HideInInspector]
     public List<EnemyStats> listOfStats;
 
+    public bool IsEndless;
+
     public List<GameObject> items;
 
     public GameObject trader;
@@ -28,6 +30,8 @@ public class EnemiesManager : MonoBehaviour
     public GameObject spawner;
 
     public Hatch[] hatches;
+
+    public GameObject TraderEnd;
 
     private List<EnemyModifiers.AddModifier> listOfModifiers;
 
@@ -47,6 +51,11 @@ public class EnemiesManager : MonoBehaviour
     {
         if (listOfEnemies.TrueForAll(x => !x.activeSelf))
         {
+            if (Depth == 9 && !IsEndless)
+            {
+                EndOfGame();
+                return;
+            }
             trader.SetActive(true);
             SpawnItem();
         }
@@ -115,5 +124,10 @@ public class EnemiesManager : MonoBehaviour
             Destroy(obj);
             objectsOnScene = new List<GameObject>();
         }
+    }
+
+    private void EndOfGame()
+    {
+        TraderEnd.SetActive(true);
     }
 }

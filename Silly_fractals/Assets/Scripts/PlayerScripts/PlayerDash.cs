@@ -37,6 +37,6 @@ public class PlayerDash : MonoBehaviour
         
         // Применяем рывок
         rb.AddForce(dashDirection * 7, ForceMode2D.Impulse);
-        
+        dashCooldown = PlayerManager.instance.player.GetComponent<PlayerStats>().dashCooldown;
     }
 }

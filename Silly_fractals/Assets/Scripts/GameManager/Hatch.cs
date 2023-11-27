@@ -81,7 +81,11 @@ public class Hatch : MonoBehaviour
     {
         listOfModifiers.ForEach(x => AddDescription(x(true)));
         _desc.text = description;
-
+        if (EnemiesManager.instance.Depth == 8 && !EnemiesManager.instance.IsEndless)
+        {
+            _desc.text = "???";
+            listOfModifiers = new List<EnemyModifiers.AddModifier>();
+        }
         StartCoroutine(OpenHatchPLZ());
     }
 
@@ -121,7 +125,9 @@ public class Hatch : MonoBehaviour
         EnemiesManager.instance.CloseHatches();
         PlayerManager.instance.player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         PlayerManager.instance.player.GetComponent<Rigidbody2D>().MovePosition(new Vector2(0f, -2.5f));
-        spawner.GetComponent<EnemySpawner>().SpawnFromList();
+        if (EnemiesManager.instance.Depth == 9 && !EnemiesManager.instance.IsEndless)
+            PlayerManager.instance.player.GetComponent<Rigidbody2D>().MovePosition(new Vector2(0f, -5f));
+        spawner.GetComponent<EnemySpawner>().Spawn();
 
         while (tempColor.a > 0f)
         {

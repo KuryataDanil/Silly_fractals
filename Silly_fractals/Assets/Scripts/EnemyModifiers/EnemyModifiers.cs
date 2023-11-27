@@ -3,9 +3,9 @@
 public static class EnemyModifiers
 {
     public delegate string AddModifier(bool get_description);
-    public static List<AddModifier> listOfModifiers = new List<AddModifier> { 
-    SpeedModifier, 
-    DamageBase, 
+    public static List<AddModifier> listOfModifiers = new List<AddModifier> {
+    SpeedModifier,
+    DamageBase,
     SpeedBase,
     Multishot,
     FireRate,
@@ -14,7 +14,8 @@ public static class EnemyModifiers
     ShootDistance,
     BulletSpeed,
     Rico,
-    BulletPenetr
+    BulletPenetr,
+    EnemyPlus
     };
 
     public static string SpeedModifier(bool get_description)
@@ -98,6 +99,13 @@ public static class EnemyModifiers
         if (!get_description)
             EnemiesManager.instance.listOfStats.ForEach(x => x.bulletPenetration++);
         return "Пули врагов пробивают насквозь на 1 раз больше";
+    }
+
+    public static string EnemyPlus(bool get_description)
+    {
+        if (!get_description)
+            EnemiesManager.instance.spawner.GetComponent<EnemySpawner>().enemyCount++;
+        return "+1 враг";
     }
 }
 

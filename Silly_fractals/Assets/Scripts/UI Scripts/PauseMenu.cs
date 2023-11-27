@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject settingsMenuUI;
     public GameObject traderUI;
+    public GameObject DeathScreen;
 
     
     void Update()
@@ -22,6 +23,11 @@ public class PauseMenu : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                if (DeathScreen.activeSelf)
+                {
+                    LoadMenu();
+                    return;
+                }
                 if (GameIsPaused)
                 {
                     Resume();

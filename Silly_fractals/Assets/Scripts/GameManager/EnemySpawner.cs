@@ -6,6 +6,9 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] enemies;
+
+    [SerializeField]
+    private GameObject boss;
     private EnemySpawnPoint[] spawnPoints;
 
     public int enemyCount;
@@ -47,4 +50,29 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    public void Spawn()
+    {
+        if (EnemiesManager.instance.Depth == 9 && !EnemiesManager.instance.IsEndless)
+        {
+            SpawnBoss();
+            return;
+        }
+        SpawnFromList();
+        if (enemyCount > EnemiesManager.instance.listOfEnemies.Count)
+            SpawnNewEnemies(1);
+    }
+
+    public void SpawnBoss()
+    {
+        PlayerManager.instance.player.GetComponent<Rigidbody2D>().MovePosition(new Vector3(0, -1.5f, 0));
+        boss = Instantiate(boss, new Vector3(0, 0, 0), Quaternion.identity);
+        StartCoroutine(EnemyAwake(boss));
+    }
+
+    IEnumerator EnemyAwake(GameObject enemy)
+    {
+        enemy.GetComponent<EnemyController>().enabled = false;
+        yield return new WaitForSeconds(1.5f);
+        enemy.GetComponent<EnemyController>().enabled = true;
+    }
 }
